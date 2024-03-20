@@ -1,3 +1,8 @@
 ---
 # tasks file for preflight-checks
 
+- name: include tasks to get hcp oauth api token
+  ansible.builtin.include_tasks: hcp/authenticate.yaml
+
+- name: include tasks to get kubeadmin password from HCP
+  ansible.builtin.include_tasks: hcp/init-secrets.yaml

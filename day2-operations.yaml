@@ -4,10 +4,19 @@
     - vars.yaml
   vars_prompt:
     - name: clientID
-      prompt: "Enter your clientID for your service principal: "
+      prompt: "Enter your clientID for your service principal"
+      private: true
+    - name: clientSecret
+      prompt: "Enter your clientSecret for your service principal"
+      private: true
+    - name: organizationID
+      prompt: "Enter your HCP organization id"
+      private: true
+    - name: projectID
+      prompt: "Enter your HCP project id"
       private: true
   tasks:
-    - name: Task to include validation role
+    - name: Task to include preflight-checks role
       ansible.builtin.include_role:
         name: preflight-checks
     
