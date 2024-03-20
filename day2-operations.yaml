@@ -1,0 +1,13 @@
+- name: Ansible playbook to configure various day2 operations
+  hosts: localhost
+  vars_files:
+    - vars.yaml
+  vars_prompt:
+    - name: clientID
+      prompt: "Enter your clientID for your service principal: "
+      private: true
+  tasks:
+    - name: Task to include validation role
+      ansible.builtin.include_role:
+        name: preflight-checks
+    
