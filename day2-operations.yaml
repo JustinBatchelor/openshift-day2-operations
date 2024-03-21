@@ -21,7 +21,7 @@
         name: preflight-checks
 
 
-
+    # This role should always remain at the end
     - name: Task to include cleanup role
       ansible.builtin.include_role:
         name: cleanup

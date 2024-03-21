@@ -3,6 +3,8 @@
 # Variable to print debug statements or not, set to true when debugging
 debug_mode: true
 
+# Variable to determine if the .kube/config should be removed.
+# Note: Only use this if you are relying on the automation to generate the kubeconfig file
 remove_kubeconfig: false
 
 # Name of the openshift cluster
