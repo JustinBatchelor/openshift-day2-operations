@@ -19,4 +19,12 @@
     - name: Task to include preflight-checks role
       ansible.builtin.include_role:
         name: preflight-checks
+
+
+
+    - name: Task to include cleanup role
+      ansible.builtin.include_role:
+        name: cleanup
+
     
+

@@ -1,0 +1,10 @@
+---
+- name: Check if the default namespace exists
+  kubernetes.core.k8s_info:
+    kind: Namespace
+    name: default
+  register: namespace_check
+
+- debug:
+    msg: "{{namespace_check}}"
+  when: debug_mode is true

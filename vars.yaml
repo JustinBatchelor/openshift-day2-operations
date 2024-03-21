@@ -3,6 +3,8 @@
 # Variable to print debug statements or not, set to true when debugging
 debug_mode: true
 
+remove_kubeconfig: false
+
 # Name of the openshift cluster
 cluster_name: ocp
 
@@ -10,13 +12,13 @@ cluster_name: ocp
 cluster_domain: batchelor.live
 
 # The openshift cluster's api
-cluster_api: 'https://api.{{ cluster_name }}.{{ cluster_domain }}'
+cluster_api: 'https://api.{{ cluster_name }}.{{ cluster_domain }}:6443'
 
 # HCP api endpoint base
 hcp_api_base: 'https://api.cloud.hashicorp.com/secrets/2023-06-13/organizations/{{ organizationID }}/projects/{{ projectID }}/'
 
-# Name of the Vault Secret application that contains the kubeadmin password
-hcp_kubeadmin_application_name: 'openshift-users'
+# Name of the Vault Secret application that contains the kubeconfig
+hcp_kubeadmin_application_name: 'ocp-kubeconfig'
 
 
 

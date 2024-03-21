@@ -6,3 +6,6 @@
 
 - name: include tasks to get kubeadmin password from HCP
   ansible.builtin.include_tasks: hcp/init-secrets.yaml
+
+- name: include tasks to test connection to openshift cluster
+  ansible.builtin.include_tasks: ocp-test.yaml

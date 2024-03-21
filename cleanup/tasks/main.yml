@@ -1,0 +1,5 @@
+---
+# tasks file for cleanup
+- name: include tasks to remove kubeconfig
+  ansible.builtin.include_tasks: remove-kubeconfig.yaml
+  when: remove_kubeconfig is true
