@@ -1,0 +1,16 @@
+---
+- name: Task to template vault argo application
+  ansible.builtin.template:
+    src: 'templates/argoapplications/vault.j2'
+    dest: '{{ playbook_dir }}/vault.yaml'
+    mode: '0644'
+
+- name: Task to apply vault argocd application
+  kubernetes.core.k8s:
+    src: '{{ playbook_dir }}/vault.yaml'
+    state: present
+
+- name: Task to remove vault yaml file since it is no longer needed
+  ansible.builtin.file:
+    path: '{{ playbook_dir }}/vault.yaml'
+    state: absent

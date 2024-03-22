@@ -24,7 +24,7 @@ hcp_kubeadmin_application_name: 'ocp-kubeconfig'
 
 ## GitOps operator information
 gitops:
-  channel: gitops-1.12
+  channel: latest
   installPlan: Automatic
   name: openshift-gitops-operator
   source: redhat-operators

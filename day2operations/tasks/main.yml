@@ -4,6 +4,8 @@
 - name: include tasks to install Red Hat OpenShift Gitops
   ansible.builtin.include_tasks: install-gitops.yaml
 
+- name: include tasks to install other operators
+  ansible.builtin.include_tasks: install-operators.yaml
 ## TODO ##
 
 ## 1. install GitOps operator
