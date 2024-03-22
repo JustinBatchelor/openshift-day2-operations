@@ -1,6 +1,8 @@
 ---
 # tasks file for day2operations
 
+- name: include tasks to install Red Hat OpenShift Gitops
+  ansible.builtin.include_tasks: install-gitops.yaml
 
 ## TODO ##
 

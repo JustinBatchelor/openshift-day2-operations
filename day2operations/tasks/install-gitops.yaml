@@ -1,0 +1,16 @@
+---
+- name: Task to template the gitopsbase template
+  ansible.builtin.template:
+    src: 'templates/gitopsbase.j2'
+    dest: '{{ playbook_dir }}/gitopsbase.yaml'
+    mode: '0644'
+
+- name: Task to apply gitops base
+  kubernetes.core.k8s:
+    src: '{{ playbook_dir }}/gitopsbase.yaml'
+    state: present
+
+- name: Task to remove gitops base file since it is no longer needed
+  ansible.builtin.file:
+    path: '{{ playbook_dir }}/gitopsbase.yaml'
+    state: absent

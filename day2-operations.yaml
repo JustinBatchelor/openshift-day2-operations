@@ -20,6 +20,9 @@
       ansible.builtin.include_role:
         name: preflight-checks
 
+    - name: Task to include the specific day2 operations
+      ansible.builtin.include_role:
+        name: day2operations
 
     # This role should always remain at the end
     - name: Task to include cleanup role
