@@ -8,6 +8,11 @@ metadata:
   labels:
     openshift.io/cluster-monitoring: 'true'
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: openshift-gitops
+---
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:

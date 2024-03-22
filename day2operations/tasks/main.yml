@@ -6,23 +6,3 @@
 
 - name: include tasks to install other operators
   ansible.builtin.include_tasks: install-operators.yaml
-## TODO ##
-
-## 1. install GitOps operator
-##    - configure reencrypt route to secure the traffic
-
-## 2. create a helm chart to deploy the following operators
-##     - Vault Secrets Operator
-##          - HCPAuth
-##          - HCPVaultSecretsApp
-##     
-##     - cert-manager
-##        - create cluster issue using 
-##     
-##     - lvm-storage
-
-
-## 3. template argocd applications for each operator and apply them to the cluster
-## .... this includes all instances of the operator as well
-
-## 4. 

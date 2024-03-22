@@ -1,0 +1,18 @@
+---
+- name: Task to remove the kubeconfig generate by this automation
+  ansible.builtin.file:
+    path: '~/.kube/config'
+    state: absent
+  when: remove_kubeconfig is true
+
+- name: Task to gather a list of files under the directory
+  ansible.builtin.find:
+    paths: '{{ playbook_dir }}/oc-apply/'
+    file_type: file
+  register: files_to_delete
+
+- name: Task to delete files
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ files_to_delete.files }}"

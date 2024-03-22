@@ -2,18 +2,13 @@
 - name: Task to template the gitopsbase template
   ansible.builtin.template:
     src: 'templates/gitopsbase.j2'
-    dest: '{{ playbook_dir }}/gitopsbase.yaml'
+    dest: '{{ playbook_dir }}/oc-apply/gitopsbase.yaml'
     mode: '0644'
 
 - name: Task to apply gitops base
   kubernetes.core.k8s:
-    src: '{{ playbook_dir }}/gitopsbase.yaml'
+    src: '{{ playbook_dir }}/oc-apply/gitopsbase.yaml'
     state: present
-
-- name: Task to remove gitops base file since it is no longer needed
-  ansible.builtin.file:
-    path: '{{ playbook_dir }}/gitopsbase.yaml'
-    state: absent
 
 - name: Task to patch argocd resource resource to reencrypt tls
   kubernetes.core.k8s:
@@ -33,6 +28,4 @@
             tls:
               insecureEdgeTerminationPolicy: Redirect
               termination: reencrypt
-        notifications:
-          enabled: true
     

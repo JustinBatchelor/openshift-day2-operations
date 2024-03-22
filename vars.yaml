@@ -22,6 +22,12 @@ hcp_api_base: 'https://api.cloud.hashicorp.com/secrets/2023-06-13/organizations/
 # Name of the Vault Secret application that contains the kubeconfig
 hcp_kubeadmin_application_name: 'ocp-kubeconfig'
 
+# Name of the Vault Secret application that the cloudflare api token is at
+hcp_homelab_application_name: 'homelab'
+
+template_certificate: false
+
+
 ## GitOps operator information
 gitops:
   channel: latest
@@ -29,6 +35,8 @@ gitops:
   name: openshift-gitops-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
+
+  
 
 
   
