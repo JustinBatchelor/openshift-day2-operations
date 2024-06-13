@@ -1,4 +1,9 @@
 ---
+- name: Ensure directory 'oc-apply' exists
+  file:
+    path: '{{ playbook_dir }}/oc-apply/'
+    state: directory
+
 - name: Task to template the gitopsbase template
   ansible.builtin.template:
     src: 'templates/gitopsbase.j2'
@@ -9,6 +14,9 @@
   kubernetes.core.k8s:
     src: '{{ playbook_dir }}/oc-apply/gitopsbase.yaml'
     state: present
+
+- name: Include tasks that validate the operator is installed and 'Available'
+  ansible.builtin.include_tasks: validations/gitops.yaml
 
 - name: Task to patch argocd resource resource to reencrypt tls
   kubernetes.core.k8s:

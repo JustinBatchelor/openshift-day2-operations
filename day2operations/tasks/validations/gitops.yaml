@@ -1,0 +1,45 @@
+---
+- name: Task to wait until the opertor is defined
+  kubernetes.core.k8s_info:
+    api_version: argoproj.io/v1alpha1
+    kind: ArgoCD
+    name: openshift-gitops
+    namespace: openshift-gitops
+  register: operator
+  until: 
+    - operator.resources[0] is defined
+  retries: 150
+  delay: 10
+
+- debug:
+    msg: "{{ operator.resources[0] }}"
+
+- name: Task to wait until the opertor.status is defined
+  kubernetes.core.k8s_info:
+    api_version: argoproj.io/v1alpha1
+    kind: ArgoCD
+    name: openshift-gitops
+    namespace: openshift-gitops
+  register: operator
+  until: 
+    - operator.resources[0].status is defined
+  retries: 150
+  delay: 10
+
+- debug:
+    msg: "{{ operator.resources[0].status }}"
+
+- name: Task to wait until the opertor.status.phase is available
+  kubernetes.core.k8s_info:
+    api_version: argoproj.io/v1alpha1
+    kind: ArgoCD
+    name: openshift-gitops
+    namespace: openshift-gitops
+  register: operator
+  until: 
+    - operator.resources[0].status.phase == 'Available'
+  retries: 150
+  delay: 10
+
+- debug:
+    msg: "{{ operator.resources[0].status.phase }}"

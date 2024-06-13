@@ -1,11 +1,13 @@
 ## Variables file for openshift-day2-operations
 
-# Variable to print debug statements or not, set to true when debugging
-debug_mode: true
+#
+clientID: "{{ lookup('env', 'HCP_CLIENT_ID') }}"
 
-# Variable to determine if the .kube/config should be removed.
-# Note: Only use this if you are relying on the automation to generate the kubeconfig file
-remove_kubeconfig: false
+clientSecret: "{{ lookup('env', 'HCP_CLIENT_SECRET') }}"
+
+organizationID: "{{ lookup('env', 'HCP_ORGANIZATION_ID') }}"
+
+projectID: "{{ lookup('env', 'HCP_PROJECT_ID') }}"
 
 # Name of the openshift cluster
 cluster_name: ocp
@@ -16,17 +18,10 @@ cluster_domain: batchelor.live
 # The openshift cluster's api
 cluster_api: 'https://api.{{ cluster_name }}.{{ cluster_domain }}:6443'
 
-# HCP api endpoint base
-hcp_api_base: 'https://api.cloud.hashicorp.com/secrets/2023-06-13/organizations/{{ organizationID }}/projects/{{ projectID }}/'
-
-# Name of the Vault Secret application that contains the kubeconfig
-hcp_kubeadmin_application_name: 'ocp-kubeconfig'
-
 # Name of the Vault Secret application that the cloudflare api token is at
 hcp_homelab_application_name: 'homelab'
 
 template_certificate: false
-
 
 ## GitOps operator information
 gitops:

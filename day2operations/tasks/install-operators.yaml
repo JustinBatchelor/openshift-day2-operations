@@ -1,4 +1,3 @@
----
 - name: Task to template root argocd application
   ansible.builtin.template:
     src: 'templates/argocd-root-app.j2'
@@ -10,38 +9,10 @@
     src: '{{ playbook_dir }}/oc-apply/argocd-root-app.yaml'
     state: present
 
-- name: Task to wait until the root app is applied via gitops
-  kubernetes.core.k8s_info:
-    api_version: argoproj.io/v1alpha1
-    kind: Application
-    name: argocd-root-app-application
-    namespace: openshift-gitops
-  register: root_app
-  until: root_app.resources is defined
-  retries: 150
-  delay: 10
 
-- name: Task to wait until the root app resources[0].status.health.status is defined
-  kubernetes.core.k8s_info:
-    api_version: argoproj.io/v1alpha1
-    kind: Application
-    name: argocd-root-app-application
-    namespace: openshift-gitops
-  register: root_app
-  until: root_app.resources[0].status.health.status is defined
-  retries: 150
-  delay: 10
+- name: Include task to validate operator installation
+  ansible.builtin.include_tasks: validations/operators.yaml
 
-- name: Task to wait until the root app is synced and healthly
-  kubernetes.core.k8s_info:
-    api_version: argoproj.io/v1alpha1
-    kind: Application
-    name: argocd-root-app-application
-    namespace: openshift-gitops
-  register: root_app
-  until: root_app.resources[0].status.health.status == 'Healthy'
-  retries: 150
-  delay: 10
   
 ## need to patch the operator
 - name: Patch certmanagers.operator.openshift.io
@@ -62,16 +33,8 @@
               - "--dns01-recursive-nameservers-only"
 
 
-- name: Task to wait until the root app is synced and healthly
-  kubernetes.core.k8s_info:
-    api_version: argoproj.io/v1alpha1
-    kind: Application
-    name: argocd-root-app-application
-    namespace: openshift-gitops
-  register: root_app
-  until: root_app.resources[0].status.health.status == 'Healthy'
-  retries: 150
-  delay: 10
+- name: Include task to validate operator installation
+  ansible.builtin.include_tasks: validations/operators.yaml
                     
 - name: Task to set var template_certificate to true
   ansible.builtin.set_fact:
@@ -88,16 +51,8 @@
     src: '{{ playbook_dir }}/oc-apply/argocd-root-app.yaml'
     state: present
 
-- name: Task to wait until the root app is synced and healthly
-  kubernetes.core.k8s_info:
-    api_version: argoproj.io/v1alpha1
-    kind: Application
-    name: argocd-root-app-application
-    namespace: openshift-gitops
-  register: root_app
-  until: root_app.resources[0].status.health.status == 'Healthy'
-  retries: 150
-  delay: 10
+- name: Include task to validate operator installation
+  ansible.builtin.include_tasks: validations/operators.yaml
 
 - name: Patch ingresscontroller.operator default
   kubernetes.core.k8s:

@@ -1,16 +1,2 @@
 ---
 # tasks file for preflight-checks
-
-- name: include tasks to check on kubeconfig status
-  ansible.builtin.include_tasks: kubeconfig-status.yaml
-
-- name: include tasks to get hcp oauth api token
-  ansible.builtin.include_tasks: hcp/authenticate.yaml
-  when: kubeconfig_status is false
-
-- name: include tasks to get kubeadmin password from HCP
-  ansible.builtin.include_tasks: hcp/init-secrets.yaml
-  when: kubeconfig_status is false
-
-- name: include tasks to test connection to openshift cluster
-  ansible.builtin.include_tasks: ocp-test.yaml

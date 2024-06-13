@@ -1,4 +1,0 @@
----
-# tasks file for cleanup
-- name: include tasks to remove files generate from automation 
-  ansible.builtin.include_tasks: remove-generated-files.yaml

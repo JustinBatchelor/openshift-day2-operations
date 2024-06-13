@@ -2,19 +2,6 @@
   hosts: localhost
   vars_files:
     - vars.yaml
-  vars_prompt:
-    - name: clientID
-      prompt: "Enter your clientID for your service principal"
-      private: true
-    - name: clientSecret
-      prompt: "Enter your clientSecret for your service principal"
-      private: true
-    - name: organizationID
-      prompt: "Enter your HCP organization id"
-      private: true
-    - name: projectID
-      prompt: "Enter your HCP project id"
-      private: true
   tasks:
     - name: Task to include preflight-checks role
       ansible.builtin.include_role:
@@ -24,10 +11,7 @@
       ansible.builtin.include_role:
         name: day2operations
 
-    # This role should always remain at the end
-    - name: Task to include cleanup role
-      ansible.builtin.include_role:
-        name: cleanup
+
 
     
 
